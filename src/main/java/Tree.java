@@ -23,25 +23,23 @@ public class Tree {
         }
     }
 
-    int ans = 0;
-    public boolean isNamePyramid() {
 
+    public boolean isNamePyramid() {
+        if (left != null && left.getName().length() < getName().length() || right != null && right.getName().length() < getName().length()) {
+            return false;
+        }
+        boolean result = true;
         if (left != null) {
-            if (left.getName().length() < getName().length()) {
-                ans++;
-            }
-            left.isNamePyramid();
+            result &= left.isNamePyramid();
+        }
+        if (!result) {
+            return false;
         }
         if (right != null) {
-            if (right.getName().length() < getName().length()) {
-                ans++;
-            }
-            right.isNamePyramid();
+            result &= right.isNamePyramid();
         }
-        return ans == 0;
+        return result;
     }
-
-
 
     public String getName() {
         return name;
